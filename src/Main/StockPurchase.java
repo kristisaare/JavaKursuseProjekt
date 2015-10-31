@@ -5,14 +5,19 @@ import java.util.Scanner;
 import finance.FinanceClass;
 import finance.Validations;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+
+import static javafx.scene.paint.Color.DARKRED;
 
 
 /**
@@ -31,10 +36,10 @@ public class StockPurchase extends Application {
         primaryStage.setTitle("Calculations");
 
         TextField askForPrice = new TextField();
-        askForPrice.setText("Enter stock price (for example 12.34)");
+        askForPrice.setText("Enter stock price (example: 12.34)");
 
         TextField askForQuantity = new TextField();
-        askForQuantity.setText("Enter number of stocks (for example 76)");
+        askForQuantity.setText("Enter number of stocks (example: 76)");
 
         button = new Button();
         button.setText("Calculate");
@@ -50,9 +55,26 @@ public class StockPurchase extends Application {
         Scene scene = new Scene(window, 400, 400); //Window properties
         primaryStage.setScene(scene);
         primaryStage.show();
+        
+//From here on the event management for button is broken
+        button.setOnAction(event -> {
+            public void (ActionEvent){
+                System.out.println(stockPriceCents + " ja " + stockQuantity);
+            }
+        }); //User clicks button and event x happens
+    }
+    public static void (ActionEvent convert) {
 
-        //double stockPrice = askForPrice.getText();//Figure out how to convert this
-        //int stockAmount = askForQuantity.getText(); // Figure out how to convert this
+        String askPriceResult = askForPrice.getText(); //Makes user's text input into String
+        String askQuantityResult = askForQuantity.getText();
+
+        double askPriceEuros = Double.parseDouble(askPriceResult); // Converts user input to Double (price in euros)
+        double askQuantity = Double.parseDouble(askQuantityResult);
+
+        int stockPriceCents = (int) askPriceEuros * 100; // Converts double to int (price in cents)
+        int stockQuantity = (int) askQuantity;
+
+    }
 
 
 
