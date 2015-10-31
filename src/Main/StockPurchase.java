@@ -4,6 +4,7 @@ package Main;
 import java.util.Scanner;
 import finance.FinanceClass;
 import finance.Validations;
+import finance.Money;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
@@ -36,10 +37,10 @@ public class StockPurchase extends Application {
         primaryStage.setTitle("Calculations");
 
         TextField askForPrice = new TextField();
-        askForPrice.setText("Enter stock price (example: 12.34)");
+        askForPrice.setPromptText("Enter stock price (example: 12.34)");
 
         TextField askForQuantity = new TextField();
-        askForQuantity.setText("Enter number of stocks (example: 76)");
+        askForQuantity.setPromptText("Enter number of stocks (example: 76)");
 
         button = new Button();
         button.setText("Calculate");
@@ -55,26 +56,33 @@ public class StockPurchase extends Application {
         Scene scene = new Scene(window, 400, 400); //Window properties
         primaryStage.setScene(scene);
         primaryStage.show();
-        
-//From here on the event management for button is broken
-        button.setOnAction(event -> {
-            public void (ActionEvent){
-                System.out.println(stockPriceCents + " ja " + stockQuantity);
-            }
-        }); //User clicks button and event x happens
+
+        button.setOnAction((event) -> {
+            Money stockPrice = StockPurchase.convertPrice(askForPrice);
+            int stockPriceCents = stockPrice.getAmountCents();
+            int stockQuantity = StockPurchase.convertQuantity(askForQuantity);
+            System.out.println("The stock costs " + stockPriceCents + " cents and you wish to buy " + stockQuantity + ".");
+        });
+
     }
-    public static void (ActionEvent convert) {
+    public static Money convertPrice(TextField askForPrice) {
 
         String askPriceResult = askForPrice.getText(); //Makes user's text input into String
-        String askQuantityResult = askForQuantity.getText();
-
         double askPriceEuros = Double.parseDouble(askPriceResult); // Converts user input to Double (price in euros)
-        double askQuantity = Double.parseDouble(askQuantityResult);
-
-        int stockPriceCents = (int) askPriceEuros * 100; // Converts double to int (price in cents)
-        int stockQuantity = (int) askQuantity;
+        int stockPriceCents = (int) (askPriceEuros * 100); // Converts double to int (price in cents)
+        Money amount = new Money(askPriceEuros);
+        return amount;
 
     }
+    public static int convertQuantity(TextField askForQuantity){
+
+        String askQuantityResult = askForQuantity.getText();
+        double askQuantity = Double.parseDouble(askQuantityResult);
+        int stockQuantity = (int) askQuantity;
+        return stockQuantity;
+    }
+
+
 
 
 
@@ -89,5 +97,5 @@ public class StockPurchase extends Application {
 
         //System.out.println("Aktsia hind on täna " + stockPrice + " senti." );
         //System.out.println("Soovid osta " + stockAmount + " aktsiat.");
-    }
+//    }
 }
