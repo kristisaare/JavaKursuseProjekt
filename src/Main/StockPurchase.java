@@ -6,19 +6,14 @@ import finance.FinanceClass;
 import finance.Validations;
 import finance.Money;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
 
-import static javafx.scene.paint.Color.DARKRED;
 
 
 /**
@@ -42,6 +37,8 @@ public class StockPurchase extends Application {
         TextField askForQuantity = new TextField();
         askForQuantity.setPromptText("Enter number of stocks (example: 76)");
 
+        Insets margin = new Insets(0, 70, 0, 70);
+
         button = new Button();
         button.setText("Calculate");
 
@@ -49,8 +46,10 @@ public class StockPurchase extends Application {
         window.setSpacing(5);
         window.setAlignment(Pos.CENTER);
 
-        window.getChildren().add(askForPrice); //Builds the window
+        window.getChildren().add(askForPrice); //Builds the window that asks for stuff
         window.getChildren().add(askForQuantity);
+        window.setMargin(askForPrice, margin);
+        window.setMargin(askForQuantity, margin);
         window.getChildren().add(button);
 
         Scene scene = new Scene(window, 400, 400); //Window properties
@@ -82,20 +81,4 @@ public class StockPurchase extends Application {
         return stockQuantity;
     }
 
-
-
-
-
-
-
-        //Scanner user = new Scanner(System.in);
-        //System.out.println("Kui palju maksab aktsia, mida osta soovid?");
-        //int stockPrice = (int) (user.nextDouble()*100); // Cast price to int in cents, only works with . not ,.
-
-        //System.out.println("Mitu aktsiat soovid osta?");
-        //int stockAmount = user.nextInt();
-
-        //System.out.println("Aktsia hind on täna " + stockPrice + " senti." );
-        //System.out.println("Soovid osta " + stockAmount + " aktsiat.");
-//    }
 }

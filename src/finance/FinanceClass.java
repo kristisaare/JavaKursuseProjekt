@@ -5,4 +5,5 @@ package finance;
  * All the math!
  */
 public class FinanceClass {
+
 }
