@@ -1,9 +1,7 @@
 package Main;
 
 
-import java.util.Scanner;
-import finance.FinanceClass;
-import finance.Validations;
+import finance.Finance;
 import finance.Money;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -37,7 +35,9 @@ public class StockPurchase extends Application {
         TextField askForQuantity = new TextField();
         askForQuantity.setPromptText("Enter number of stocks (example: 76)");
 
-        Insets margin = new Insets(0, 70, 0, 70);
+        Finance finance = new Finance(); //Jee jee hakkab Finantsklassis olevaid arvutusi tegema?
+
+        Insets margin = new Insets(0, 70, 0, 70); //Annab textboxile ääred
 
         button = new Button();
         button.setText("Calculate");
@@ -60,6 +60,8 @@ public class StockPurchase extends Application {
             Money stockPrice = StockPurchase.convertPrice(askForPrice);
             int stockPriceCents = stockPrice.getAmountCents();
             int stockQuantity = StockPurchase.convertQuantity(askForQuantity);
+            finance.calculate(stockPriceCents, stockQuantity);
+
             System.out.println("The stock costs " + stockPriceCents + " cents and you wish to buy " + stockQuantity + ".");
         });
 
