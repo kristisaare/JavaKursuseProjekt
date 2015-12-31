@@ -10,18 +10,26 @@ public class Finance {
 
     }
 
-    public void calculate(int stockPriceCents, int stockQuantity){
+    public void calculateEST(int stockPriceCents, int stockQuantity){ //Runs calc for all types of banks for EST fees
         LHV lhv = new LHV();
-        int bankFeeLHV = lhv.calculate(stockPriceCents, stockQuantity);
-        System.out.println("LHV fee is " + bankFeeLHV);
+        int bankFeeLHVEST = lhv.calculateEST(stockPriceCents, stockQuantity);
+        System.out.println("LHV fee is " + bankFeeLHVEST);
 
         SWED swed = new SWED();
-        int bankFeeSWED = swed.calculate(stockPriceCents, stockQuantity);
-        System.out.println("SWED fee is " + bankFeeSWED);
+        int bankFeeSWEDEST = swed.calculateEST(stockPriceCents, stockQuantity);
+        System.out.println("SWED fee is " + bankFeeSWEDEST);
 
         SEB seb = new SEB();
-        int bankFeeSEB = seb.calculate(stockPriceCents, stockQuantity);
-        System.out.println("SEB fee is " + bankFeeSEB);
+        int bankFeeSEBEST = seb.calculateEST(stockPriceCents, stockQuantity);
+        System.out.println("SEB fee is " + bankFeeSEBEST);
+
+    }
+
+    public void calculateFINSWE(int stockPriceCents, int stockQuantity){ //Runs calc for all types of banks for Finnish and Swedish fees
+
+    }
+
+    public void calculateUSA(int stockPriceCents, int stockQuantity){ // Runs calc for all types of bank for USA fees
 
     }
 
