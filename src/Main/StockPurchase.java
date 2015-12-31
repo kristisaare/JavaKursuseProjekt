@@ -1,9 +1,7 @@
 package Main;
 
 
-import finance.Actionhandler;
-import finance.Finance;
-import finance.Money;
+import finance.ActionHandler;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
@@ -62,8 +60,8 @@ public class StockPurchase extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        Actionhandler actionHandler = new Actionhandler(askForPrice, askForQuantity, choiceBox);
-        button.setOnAction(actionHandler);//Makes the button do the stuff told in the Actionhandler class
+        ActionHandler actionHandler = new ActionHandler(askForPrice, askForQuantity, choiceBox);
+        button.setOnAction(actionHandler);//Makes the button do the stuff told in the ActionHandler class
     }
 
 

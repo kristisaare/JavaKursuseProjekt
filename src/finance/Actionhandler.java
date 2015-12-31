@@ -1,6 +1,5 @@
 package finance;
 
-import Main.StockPurchase;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.ChoiceBox;
@@ -10,7 +9,7 @@ import javafx.scene.control.TextField;
  * Created by kristi on 31/12/15.
  * Determines what happens on button press
  */
-public class Actionhandler implements EventHandler<ActionEvent> {
+public class ActionHandler implements EventHandler<ActionEvent> {
 
     Finance finance = new Finance(); //Creates new instance of Finance to run calc.
     TextField priceTextField;
@@ -34,7 +33,7 @@ public class Actionhandler implements EventHandler<ActionEvent> {
         return stockQuantity;
     }
 
-    public Actionhandler(TextField _priceTextField, TextField _quantityTextField, ChoiceBox _countryChoice){
+    public ActionHandler(TextField _priceTextField, TextField _quantityTextField, ChoiceBox _countryChoice){
         priceTextField = _priceTextField;
         quantityTextField = _quantityTextField;
         countryChoice = _countryChoice;
@@ -45,9 +44,9 @@ public class Actionhandler implements EventHandler<ActionEvent> {
     public void handle(ActionEvent event) {
         System.out.println("Hurraa!");
 
-        Money stockPrice = Actionhandler.convertPrice(priceTextField);
+        Money stockPrice = ActionHandler.convertPrice(priceTextField);
         int stockPriceCents = stockPrice.getAmountCents();
-        int stockQuantity = Actionhandler.convertQuantity(quantityTextField);
+        int stockQuantity = ActionHandler.convertQuantity(quantityTextField);
         finance.calculateEST(stockPriceCents, stockQuantity); //Runs calculations EST
         finance.calculateFINSWE(stockPriceCents, stockQuantity); //Runs calculations FINSWE
         finance.calculateUSA(stockPriceCents, stockQuantity); //Runs calculations USA
