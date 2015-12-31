@@ -2,7 +2,9 @@ package finance;
 
 /**
  * Created by kristi on 05/12/15.
- * LHV stock fee = 3 eur + 0.2%
+ * LHV EST stock purchase fee = 3 eur + 0.2%
+ * LHV FIN/SWE stock purchase fee = 11 EUR + 0.3%
+ * LHV USA stock purchase fee = 11 EUR + 0.3%
  */
 public class LHV {
     int flatFeeEST = 300;

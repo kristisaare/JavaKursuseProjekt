@@ -1,6 +1,7 @@
 package Main;
 
 
+import finance.Actionhandler;
 import finance.Finance;
 import finance.Money;
 import javafx.application.Application;
@@ -9,11 +10,11 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.Scene;
-
 
 
 /**
@@ -29,7 +30,7 @@ public class StockPurchase extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("Calculations");
+        primaryStage.setTitle("Stock purchase calculations");
 
         TextField askForPrice = new TextField();
         askForPrice.setPromptText("Enter stock price (example: 12.34)");
@@ -37,7 +38,6 @@ public class StockPurchase extends Application {
         TextField askForQuantity = new TextField();
         askForQuantity.setPromptText("Enter number of stocks (example: 76)");
 
-        Finance finance = new Finance(); //Creates new instance of Finance to run calc.
 
         Insets margin = new Insets(0, 70, 0, 70); //Gives textbox margins
 
@@ -49,6 +49,7 @@ public class StockPurchase extends Application {
         window.setAlignment(Pos.CENTER);
 
         ChoiceBox choiceBox = new ChoiceBox(FXCollections.observableArrayList("EST", "FIN/SWE", "USA")); //Country choices
+        choiceBox.setTooltip(new Tooltip("Select country"));
 
         window.getChildren().add(askForPrice); //Builds the window that asks for stuff
         window.getChildren().add(askForQuantity);
@@ -61,33 +62,10 @@ public class StockPurchase extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        button.setOnAction((event) -> {
-            Money stockPrice = StockPurchase.convertPrice(askForPrice);
-            int stockPriceCents = stockPrice.getAmountCents();
-            int stockQuantity = StockPurchase.convertQuantity(askForQuantity);
-            finance.calculateEST(stockPriceCents, stockQuantity); //Runs calculations EST
-            finance.calculateFINSWE(stockPriceCents, stockQuantity); //Runs calculations FINSWE
-            finance.calculateUSA(stockPriceCents, stockQuantity); //Runs calculaions USA
-
-            System.out.println("The stock costs " + stockPriceCents + " cents and you wish to buy " + stockQuantity + ".");
-        });
-
+        Actionhandler actionHandler = new Actionhandler(askForPrice, askForQuantity, choiceBox);
+        button.setOnAction(actionHandler);//Makes the button do the stuff told in the Actionhandler class
     }
-    public static Money convertPrice(TextField askForPrice) {
 
-        String askPriceResult = askForPrice.getText(); //Makes user's text input into String
-        double askPriceEuros = Double.parseDouble(askPriceResult); // Converts user input to Double (price in euros)
-        int stockPriceCents = (int) (askPriceEuros * 100); // Converts double to int (price in cents)
-        Money amount = new Money(askPriceEuros);
-        return amount;
 
-    }
-    public static int convertQuantity(TextField askForQuantity){
-
-        String askQuantityResult = askForQuantity.getText();
-        double askQuantity = Double.parseDouble(askQuantityResult);
-        int stockQuantity = (int) askQuantity;
-        return stockQuantity;
-    }
 
 }

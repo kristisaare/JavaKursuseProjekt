@@ -2,7 +2,9 @@ package finance;
 
 /**
  * Created by kristi on 05/12/15.
- * Swed stock purchase fee = 0.2% OR min 3 EUR
+ * Swed EST stock purchase fee = 0.2% OR min 3 EUR
+ * Swed FIN/SWE stock purchase fee = 0.2% OR min 18.85 EUR
+ * Swed USA stock purchase fee = 0.2% OR min 18.85 EUR
  */
 public class SWED {
     int minimumFeeEST = 320;

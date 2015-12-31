@@ -3,6 +3,7 @@ package finance;
 /**
  * Created by kristi on 11/10/15.
  * All the math!
+ * Calculates stock purchase fees for all countries x all banks.
  */
 public class Finance {
 

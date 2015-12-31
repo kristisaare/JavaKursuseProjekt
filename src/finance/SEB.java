@@ -2,7 +2,9 @@ package finance;
 
 /**
  * Created by kristi on 05/12/15.
- * SEB stock purchase fee = 0.2% OR min 3 EUR
+ * SEB EST stock purchase fee = 0.2% OR min 3 EUR
+ * SEB FIN/SWE stock purchase fee = 14 EUR + 0.2%
+ * SEB USA stock purchase fee = 14 EUR + 0.2% OR 14 EUR + 0.01€ per stock if stock price <5 EUR
  */
 public class SEB {
     int minimumFeeEST = 320;
@@ -29,7 +31,7 @@ public class SEB {
     }
 
     public int calculateUSA(int stockPriceCents, int stockQuantity){
-        if (stockPriceCents<500){
+        if (stockPriceCents<=500){
             int purchaseFeeUSA = flatFeeUSA + (lowPriceFeeUSA*stockQuantity);
             return purchaseFeeUSA;
         }else{

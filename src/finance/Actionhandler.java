@@ -1,0 +1,56 @@
+package finance;
+
+import Main.StockPurchase;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
+
+/**
+ * Created by kristi on 31/12/15.
+ * Determines what happens on button press
+ */
+public class Actionhandler implements EventHandler<ActionEvent> {
+
+    Finance finance = new Finance(); //Creates new instance of Finance to run calc.
+    TextField priceTextField;
+    TextField quantityTextField;
+    ChoiceBox countryChoice;
+
+    public static Money convertPrice(TextField askForPrice) {
+
+        String askPriceResult = askForPrice.getText(); //Makes user's text input into String
+        double askPriceEuros = Double.parseDouble(askPriceResult); // Converts user input to Double (price in euros)
+        int stockPriceCents = (int) (askPriceEuros * 100); // Converts double to int (price in cents)
+        Money amount = new Money(askPriceEuros);
+        return amount;
+
+    }
+    public static int convertQuantity(TextField askForQuantity){
+
+        String askQuantityResult = askForQuantity.getText();
+        double askQuantity = Double.parseDouble(askQuantityResult);
+        int stockQuantity = (int) askQuantity;
+        return stockQuantity;
+    }
+
+    public Actionhandler(TextField _priceTextField, TextField _quantityTextField, ChoiceBox _countryChoice){
+        priceTextField = _priceTextField;
+        quantityTextField = _quantityTextField;
+        countryChoice = _countryChoice;
+    }
+
+
+    @Override
+    public void handle(ActionEvent event) {
+        System.out.println("Hurraa!");
+
+        Money stockPrice = Actionhandler.convertPrice(priceTextField);
+        int stockPriceCents = stockPrice.getAmountCents();
+        int stockQuantity = Actionhandler.convertQuantity(quantityTextField);
+        finance.calculateEST(stockPriceCents, stockQuantity); //Runs calculations EST
+        finance.calculateFINSWE(stockPriceCents, stockQuantity); //Runs calculations FINSWE
+        finance.calculateUSA(stockPriceCents, stockQuantity); //Runs calculations USA
+
+    }
+}
