@@ -4,8 +4,10 @@ package Main;
 import finance.Finance;
 import finance.Money;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -46,10 +48,13 @@ public class StockPurchase extends Application {
         window.setSpacing(5);
         window.setAlignment(Pos.CENTER);
 
+        ChoiceBox choiceBox = new ChoiceBox(FXCollections.observableArrayList("EST", "FIN/SWE", "USA")); //Country choices
+
         window.getChildren().add(askForPrice); //Builds the window that asks for stuff
         window.getChildren().add(askForQuantity);
         window.setMargin(askForPrice, margin);
         window.setMargin(askForQuantity, margin);
+        window.getChildren().add(choiceBox);
         window.getChildren().add(button);
 
         Scene scene = new Scene(window, 400, 400); //Window properties
