@@ -35,7 +35,7 @@ public class SWED {
         if (purchaseFeeUSA > minimumFeeUSA){
             return purchaseFeeUSA;
         } else {
-            return minimumFeeUSA
+            return minimumFeeUSA;
         }
     }
 }

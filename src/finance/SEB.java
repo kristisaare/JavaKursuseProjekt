@@ -30,7 +30,7 @@ public class SEB {
 
     public int calculateUSA(int stockPriceCents, int stockQuantity){
         if (stockPriceCents<500){
-            int purchaseFeeUSA = (stockPriceCents*lowPriceFeeUSA*stockQuantity);
+            int purchaseFeeUSA = flatFeeUSA + (lowPriceFeeUSA*stockQuantity);
             return purchaseFeeUSA;
         }else{
             int purchaseFeeUSA = flatFeeUSA + (int) (stockPriceCents*perCentFeeUSA*stockQuantity);

@@ -60,7 +60,9 @@ public class StockPurchase extends Application {
             Money stockPrice = StockPurchase.convertPrice(askForPrice);
             int stockPriceCents = stockPrice.getAmountCents();
             int stockQuantity = StockPurchase.convertQuantity(askForQuantity);
-            finance.calculateEST(stockPriceCents, stockQuantity); //Runs calculations
+            finance.calculateEST(stockPriceCents, stockQuantity); //Runs calculations EST
+            finance.calculateFINSWE(stockPriceCents, stockQuantity); //Runs calculations FINSWE
+            finance.calculateUSA(stockPriceCents, stockQuantity); //Runs calculaions USA
 
             System.out.println("The stock costs " + stockPriceCents + " cents and you wish to buy " + stockQuantity + ".");
         });
