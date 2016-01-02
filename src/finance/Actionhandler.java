@@ -42,14 +42,32 @@ public class ActionHandler implements EventHandler<ActionEvent> {
 
     @Override
     public void handle(ActionEvent event) {
-        System.out.println("Hurraa!");
+        System.out.println("Hurraa!"+ countryChoice.getValue());
 
         Money stockPrice = ActionHandler.convertPrice(priceTextField);
         int stockPriceCents = stockPrice.getAmountCents();
         int stockQuantity = ActionHandler.convertQuantity(quantityTextField);
-        finance.calculateEST(stockPriceCents, stockQuantity); //Runs calculations EST
+
+        String country = (String) countryChoice.getValue();
+
+        switch (country){
+            case "EST":
+                finance.calculateEST(stockPriceCents, stockQuantity);
+                break;
+            case "FIN/SWE":
+                finance.calculateFINSWE(stockPriceCents, stockQuantity);
+                break;
+            case "USA":
+                finance.calculateUSA(stockPriceCents, stockQuantity);
+                break;
+            default:
+                //TODO Panic
+        }
+
+
+        /*finance.calculateEST(stockPriceCents, stockQuantity); //Runs calculations EST
         finance.calculateFINSWE(stockPriceCents, stockQuantity); //Runs calculations FINSWE
-        finance.calculateUSA(stockPriceCents, stockQuantity); //Runs calculations USA
+        finance.calculateUSA(stockPriceCents, stockQuantity); //Runs calculations USA*/
 
     }
 }
