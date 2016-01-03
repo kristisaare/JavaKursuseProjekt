@@ -5,6 +5,8 @@ import javafx.event.EventHandler;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 
+import java.util.HashMap;
+
 /**
  * Created by kristi on 31/12/15.
  * Determines what happens on button press
@@ -15,6 +17,7 @@ public class ActionHandler implements EventHandler<ActionEvent> {
     TextField priceTextField;
     TextField quantityTextField;
     ChoiceBox countryChoice;
+    StockChart stockChart;
 
     public static Money convertPrice(TextField askForPrice) {
 
@@ -33,10 +36,11 @@ public class ActionHandler implements EventHandler<ActionEvent> {
         return stockQuantity;
     }
 
-    public ActionHandler(TextField _priceTextField, TextField _quantityTextField, ChoiceBox _countryChoice){
+    public ActionHandler(TextField _priceTextField, TextField _quantityTextField, ChoiceBox _countryChoice, StockChart _stockChart){
         priceTextField = _priceTextField;
         quantityTextField = _quantityTextField;
         countryChoice = _countryChoice;
+        stockChart = _stockChart;
     }
 
 
@@ -50,24 +54,24 @@ public class ActionHandler implements EventHandler<ActionEvent> {
 
         String country = (String) countryChoice.getValue();
 
-        switch (country){
+        HashMap<String, Money> results;
+
+        switch (country){ //Activates country appropriate calculations
             case "EST":
-                finance.calculateEST(stockPriceCents, stockQuantity);
+                results = finance.calculateEST(stockPriceCents, stockQuantity);
                 break;
             case "FIN/SWE":
-                finance.calculateFINSWE(stockPriceCents, stockQuantity);
+                results = finance.calculateFINSWE(stockPriceCents, stockQuantity);
                 break;
             case "USA":
-                finance.calculateUSA(stockPriceCents, stockQuantity);
+                results = finance.calculateUSA(stockPriceCents, stockQuantity);
                 break;
             default:
-                //TODO Panic
+                return; //TODO Panic
         }
 
-
-        /*finance.calculateEST(stockPriceCents, stockQuantity); //Runs calculations EST
-        finance.calculateFINSWE(stockPriceCents, stockQuantity); //Runs calculations FINSWE
-        finance.calculateUSA(stockPriceCents, stockQuantity); //Runs calculations USA*/
+        stockChart.displayResults(results);
 
     }
+
 }

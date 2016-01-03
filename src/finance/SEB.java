@@ -16,27 +16,27 @@ public class SEB {
     int lowPriceFeeUSA = 1;
 
 
-    public int calculateEST(int stockPriceCents, int stockQuantity) {
+    public Money calculateEST(int stockPriceCents, int stockQuantity) {
         int purchaseFeeEST = (int) (perCentFeeEST * stockPriceCents * stockQuantity);
         if (purchaseFeeEST > minimumFeeEST) {
-            return purchaseFeeEST;
+            return new Money(purchaseFeeEST);
         }else{
-            return minimumFeeEST;
+            return new Money(minimumFeeEST);
         }
     }
 
-    public int calculateFINSWE(int stockPriceCents, int stockQuantity){
+    public Money calculateFINSWE(int stockPriceCents, int stockQuantity){
         int purchaseFeeFINSWE = flatFeeFINSWE + (int) (percentFeeFINSWE*stockPriceCents*stockQuantity);
-        return purchaseFeeFINSWE;
+        return new Money(purchaseFeeFINSWE);
     }
 
-    public int calculateUSA(int stockPriceCents, int stockQuantity){
+    public Money calculateUSA(int stockPriceCents, int stockQuantity){
         if (stockPriceCents<=500){
             int purchaseFeeUSA = flatFeeUSA + (lowPriceFeeUSA*stockQuantity);
-            return purchaseFeeUSA;
+            return new Money(purchaseFeeUSA);
         }else{
             int purchaseFeeUSA = flatFeeUSA + (int) (stockPriceCents*perCentFeeUSA*stockQuantity);
-            return purchaseFeeUSA;
+            return new Money(purchaseFeeUSA);
         }
     }
 

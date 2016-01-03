@@ -14,18 +14,18 @@ public class LHV {
     int flatFeeUSA = 1100;
     double perCentFeeUSA = 0.003;
 
-    public int calculateEST(int stockPriceCents, int stockQuantity){
+    public Money calculateEST(int stockPriceCents, int stockQuantity){
         int purchaseFeeEST = flatFeeEST + (int) (perCentFeeEST*stockPriceCents*stockQuantity);
-        return purchaseFeeEST;
+        return new Money(purchaseFeeEST);
     }
 
-    public int calculateFINSWE(int stockPriceCents, int stockQuantity){
+    public Money calculateFINSWE(int stockPriceCents, int stockQuantity){
         int purchaseFeeFINSWE = flatFeeFINSWE + (int) (perCentFeeFINSWE*stockPriceCents*stockQuantity);
-        return purchaseFeeFINSWE;
+        return new Money(purchaseFeeFINSWE);
     }
 
-    public int calculateUSA(int stockPriceCents, int stockQuantity){
+    public Money calculateUSA(int stockPriceCents, int stockQuantity){
         int purchaseFeeUSA = flatFeeUSA + (int) (perCentFeeUSA*stockPriceCents*stockQuantity);
-        return purchaseFeeUSA;
+        return new Money(purchaseFeeUSA);
     }
 }

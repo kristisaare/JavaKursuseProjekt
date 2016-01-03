@@ -1,5 +1,7 @@
 package finance;
 
+import java.util.HashMap;
+
 /**
  * Created by kristi on 11/10/15.
  * All the math!
@@ -11,47 +13,71 @@ public class Finance {
 
     }
 
-    public void calculateEST(int stockPriceCents, int stockQuantity){ //Runs calc for all types of banks for EST fees
+    public HashMap calculateEST(int stockPriceCents, int stockQuantity){ //Runs calc for all types of banks for EST fees
+
+        HashMap<String, Money> fees = new HashMap<>();
+
         LHV lhv = new LHV();
-        int bankFeeLHVEST = lhv.calculateEST(stockPriceCents, stockQuantity);
-        System.out.println("LHV EST fee is " + bankFeeLHVEST);
+        Money bankFeeLHVEST = lhv.calculateEST(stockPriceCents, stockQuantity);
+        System.out.println("LHV EST fee is " + bankFeeLHVEST.getAmountCents());
+        fees.put("LHV", bankFeeLHVEST);
 
         SWED swed = new SWED();
-        int bankFeeSWEDEST = swed.calculateEST(stockPriceCents, stockQuantity);
-        System.out.println("SWED EST fee is " + bankFeeSWEDEST);
+        Money bankFeeSWEDEST = swed.calculateEST(stockPriceCents, stockQuantity);
+        System.out.println("SWED EST fee " + bankFeeSWEDEST.getAmountCents());
+        fees.put("SWED", bankFeeSWEDEST);
 
         SEB seb = new SEB();
-        int bankFeeSEBEST = seb.calculateEST(stockPriceCents, stockQuantity);
-        System.out.println("SEB EST fee is " + bankFeeSEBEST);
+        Money bankFeeSEBEST = seb.calculateEST(stockPriceCents, stockQuantity);
+        System.out.println("SEB EST fee is " + bankFeeSEBEST.getAmountCents());
+        fees.put("SEB", bankFeeSEBEST);
+
+        return fees;
 
     }
 
-    public void calculateFINSWE(int stockPriceCents, int stockQuantity){ //Runs calc for all types of banks for Finnish and Swedish fees
+    public HashMap calculateFINSWE(int stockPriceCents, int stockQuantity){ //Runs calc for all types of banks for Finnish and Swedish fees
+
+        HashMap<String, Money> fees = new HashMap<>();
+
         LHV lhv = new LHV();
-        int bankFeeLHVFINSWE = lhv.calculateFINSWE(stockPriceCents, stockQuantity);
-        System.out.println("LHV FINSWE fee is " + bankFeeLHVFINSWE);
+        Money bankFeeLHVFINSWE = lhv.calculateFINSWE(stockPriceCents, stockQuantity);
+        System.out.println("LHV FINSWE fee is " + bankFeeLHVFINSWE.getAmountCents());
+        fees.put("LHV", bankFeeLHVFINSWE);
 
         SWED swed = new SWED();
-        int bankFeeSWEDFINSWE = swed.calculateFINSWE(stockPriceCents,stockQuantity);
-        System.out.println("SWED FINSWE fee is " + bankFeeSWEDFINSWE);
+        Money bankFeeSWEDFINSWE = swed.calculateFINSWE(stockPriceCents,stockQuantity);
+        System.out.println("SWED FINSWE fee is " + bankFeeSWEDFINSWE.getAmountCents());
+        fees.put("SWED", bankFeeSWEDFINSWE);
 
         SEB seb = new SEB();
-        int bankFeeSEBFINSWE = seb.calculateFINSWE(stockPriceCents,stockQuantity);
-        System.out.println("SEB USA fee is " + bankFeeSEBFINSWE);
+        Money bankFeeSEBFINSWE = seb.calculateFINSWE(stockPriceCents,stockQuantity);
+        System.out.println("SEB FINSWE fee is " + bankFeeSEBFINSWE.getAmountCents());
+        fees.put("SEB", bankFeeSEBFINSWE);
+
+        return fees;
     }
 
-    public void calculateUSA(int stockPriceCents, int stockQuantity){ // Runs calc for all types of bank for USA fees
+    public HashMap calculateUSA(int stockPriceCents, int stockQuantity){ // Runs calc for all types of bank for USA fees
+
+        HashMap<String, Money> fees = new HashMap<>();
+
         LHV lhv = new LHV();
-        int bankFeeLHVUSA = lhv.calculateUSA(stockPriceCents, stockQuantity);
-        System.out.println("LHV USA fee is " + bankFeeLHVUSA);
+        Money bankFeeLHVUSA = lhv.calculateUSA(stockPriceCents, stockQuantity);
+        System.out.println("LHV USA fee is " + bankFeeLHVUSA.getAmountCents());
+        fees.put("LHV", bankFeeLHVUSA);
 
         SWED swed = new SWED();
-        int bankFeeSWEDUSA = swed.calculateUSA(stockPriceCents, stockQuantity);
-        System.out.println("SWED USA fee is " + bankFeeSWEDUSA);
+        Money bankFeeSWEDUSA = swed.calculateUSA(stockPriceCents, stockQuantity);
+        System.out.println("SWED USA fee is " + bankFeeSWEDUSA.getAmountCents());
+        fees.put("SWED", bankFeeSWEDUSA);
 
         SEB seb = new SEB();
-        int bankFeeSEBUSA = seb.calculateUSA(stockPriceCents, stockQuantity);
-        System.out.println("SEB USA fee is " + bankFeeSEBUSA);
+        Money bankFeeSEBUSA = seb.calculateUSA(stockPriceCents, stockQuantity);
+        System.out.println("SEB USA fee is " + bankFeeSEBUSA.getAmountCents());
+        fees.put("SEB", bankFeeSEBUSA);
+
+        return fees;
     }
 
 }

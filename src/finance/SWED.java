@@ -14,30 +14,30 @@ public class SWED {
     int minimumFeeUSA = 1885;
     double perCentFeeUSA = 0.002;
 
-    public int calculateEST(int stockPriceCents, int stockQuantity){
+    public Money calculateEST(int stockPriceCents, int stockQuantity){
         int purchaseFeeEST = (int) (perCentFeeEST*stockPriceCents*stockQuantity);
         if (purchaseFeeEST > minimumFeeEST) {
-            return purchaseFeeEST;
+            return new Money(purchaseFeeEST);
         } else {
-            return minimumFeeEST;
+            return new Money(minimumFeeEST);
         }
     }
 
-    public int calculateFINSWE(int stockPriceCents, int stockQuantity){
+    public Money calculateFINSWE(int stockPriceCents, int stockQuantity){
         int purchaseFeeFINSWE = (int) (perCentFeeFINSWE*stockPriceCents*stockQuantity);
         if (purchaseFeeFINSWE > minimumFeeFINSWE){
-            return purchaseFeeFINSWE;
+            return new Money(purchaseFeeFINSWE);
         } else {
-            return minimumFeeFINSWE;
+            return new Money(minimumFeeFINSWE);
         }
     }
 
-    public int calculateUSA(int stockPriceCents, int stockQuantity){
+    public Money calculateUSA(int stockPriceCents, int stockQuantity){
         int purchaseFeeUSA = (int) (perCentFeeUSA*stockPriceCents*stockQuantity);
         if (purchaseFeeUSA > minimumFeeUSA){
-            return purchaseFeeUSA;
+            return new Money(purchaseFeeUSA);
         } else {
-            return minimumFeeUSA;
+            return new Money(minimumFeeUSA);
         }
     }
 }
