@@ -49,12 +49,11 @@ public class ActionHandler implements EventHandler<ActionEvent> {
         countryChoice = _countryChoice;
         stockChart = _stockChart;
         resultsLabel = _resultsLabel;
-    }
+    } //Feeds all necessary data into ActionHandler
 
 
     @Override
     public void handle(ActionEvent event) {
-        System.out.println("Hurraa! "+ countryChoice.getValue());
 
         Money stockPrice = ActionHandler.convertPrice(priceTextField);
         int stockPriceCents = stockPrice.getAmountCents();
@@ -75,27 +74,25 @@ public class ActionHandler implements EventHandler<ActionEvent> {
                 results = finance.calculateUSA(stockPriceCents, stockQuantity);
                 break;
             default:
-                return; 
+                return;
         }
 
-        stockChart.displayResults(results);
+        stockChart.displayResults(results); //Gets all data for display text
         Money lowestFee = finance.findLowestFee(results);
-        System.out.println(lowestFee.getAmountAsDouble());
         double feePercent = finance.feeImpactPercent(lowestFee, stockPrice, stockQuantity);
-        System.out.println(feePercent);
         boolean feeIsReasonable = feePercent<=Finance.reasonableFeePercent;
 
         displayResultsText(results, lowestFee, feePercent, feeIsReasonable);
 
     }
 
-    public void displayResultsText(HashMap<String, Money> results,
+    public void displayResultsText(HashMap<String, Money> results, //Creates the display text with given values
                                    Money lowestFee,
                                    double feePercent,
                                    boolean feeIsReasonable){
         ArrayList cheapestBanks = new ArrayList();
         for (HashMap.Entry<String, Money> valuePair : results.entrySet()){
-            if (lowestFee.getAmountCents()==valuePair.getValue().getAmountCents()){
+            if (lowestFee.getAmountCents()==valuePair.getValue().getAmountCents()){ //Gets key for lowest value(s)
                 cheapestBanks.add(valuePair.getKey());
             }
         }
@@ -107,12 +104,11 @@ public class ActionHandler implements EventHandler<ActionEvent> {
         String feedbackPositive = new String("This is a reasonably big purchase.");
         String feedbackNegative = new String("You should consider making a bigger purchase.");
 
-        if (feeIsReasonable){
+        if (feeIsReasonable){//Condition for positive/negative feedback
             feedback = feedback + feedbackPositive;
         } else {
             feedback = feedback + feedbackNegative;
         }
-        System.out.println(feedback);
         resultsLabel.setText(feedback);
     }
 

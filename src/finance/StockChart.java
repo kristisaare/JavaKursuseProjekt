@@ -15,10 +15,9 @@ public class StockChart extends VBox { //Chart testing
 
     public StockChart() {
         super();//May not be necessary
-
     }
 
-    public void displayResults(HashMap<String, Money> results){
+    public void displayResults(HashMap<String, Money> results){ //Builds  chart logic
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis();
 
@@ -33,8 +32,7 @@ public class StockChart extends VBox { //Chart testing
         feeSeries.setName("Stock price comparison");
 
         for (HashMap.Entry<String, Money> valuePair : results.entrySet())  {
-            feeSeries.getData().add(new XYChart.Data(valuePair.getKey(), valuePair.getValue().getAmountAsDouble()));//Gets data from hashmap
-            System.out.println(valuePair.getValue().getAmountAsDouble());//Test printout
+            feeSeries.getData().add(new XYChart.Data(valuePair.getKey(), valuePair.getValue().getAmountAsDouble()));//Gets data from hashmap, goes through all pairs
         }
 
         barChart.getData().add(feeSeries);

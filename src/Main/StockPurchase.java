@@ -16,6 +16,7 @@ import javafx.scene.Scene;
 
 /**
  * Created by kristi on 11/10/15.
+ * Manages the main window.
  */
 public class StockPurchase extends Application {
 
@@ -53,7 +54,7 @@ public class StockPurchase extends Application {
 
         ChoiceBox choiceBox = new ChoiceBox(FXCollections.observableArrayList("EST", "FIN/SWE", "USA")); //Country choices
         choiceBox.setTooltip(new Tooltip("Select country"));
-        choiceBox.getSelectionModel().selectFirst();
+        choiceBox.getSelectionModel().selectFirst(); //Removes option to be empty
 
         window.getChildren().add(priceLabel); //Builds the window that asks for stuff
         window.getChildren().add(askForPrice);
@@ -73,10 +74,6 @@ public class StockPurchase extends Application {
         ActionHandler actionHandler = new ActionHandler(askForPrice, askForQuantity, choiceBox, stockChart,resultsLabel);
         button.setOnAction(actionHandler);//Makes the button do the stuff told in the ActionHandler class
 
-
-
-
     }
-
 
 }

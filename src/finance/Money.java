@@ -8,7 +8,7 @@ public class Money {
 
     int amountCents;
 
-    public Money(double amount){
+    public Money(double amount){ //Can give Money data as either int or double (overload) http://beginnersbook.com/2013/05/method-overloading/
         amountCents = (int) (amount*100);
     }
     public Money(int _amountCents){
@@ -23,6 +23,4 @@ public class Money {
 
     public double getAmountAsDouble() { return amountCents/100.0; }
 
-
-    //ToDo make a method to print stockprice to string
 }
