@@ -33,7 +33,7 @@ public class StockChart extends VBox { //Chart testing
         feeSeries.setName("Stock price comparison");
 
         for (HashMap.Entry<String, Money> valuePair : results.entrySet())  {
-            feeSeries.getData().add(new XYChart.Data(valuePair.getKey(), valuePair.getValue().getAmountAsDouble()));
+            feeSeries.getData().add(new XYChart.Data(valuePair.getKey(), valuePair.getValue().getAmountAsDouble()));//Gets data from hashmap
             System.out.println(valuePair.getValue().getAmountAsDouble());//Test printout
         }
 

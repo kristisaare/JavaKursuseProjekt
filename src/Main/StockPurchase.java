@@ -29,8 +29,10 @@ public class StockPurchase extends Application {
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Stock purchase calculations");
 
-        Label label1 = new Label("Enter stock price");
-        Label label2 = new Label("Enter stock amount");
+        Label priceLabel = new Label("Enter stock price");
+        Label amountLabel = new Label("Enter stock amount");
+        Label resultsLabel = new Label();
+        resultsLabel.setWrapText(true);
 
         TextField askForPrice = new TextField();
         askForPrice.setPromptText("example: 12.34");
@@ -39,7 +41,6 @@ public class StockPurchase extends Application {
         askForQuantity.setPromptText("example: 76");
 
         StockChart stockChart = new StockChart();
-
 
         Insets margin = new Insets(2, 70, 0, 70); //Gives textbox margins
 
@@ -52,23 +53,27 @@ public class StockPurchase extends Application {
 
         ChoiceBox choiceBox = new ChoiceBox(FXCollections.observableArrayList("EST", "FIN/SWE", "USA")); //Country choices
         choiceBox.setTooltip(new Tooltip("Select country"));
+        choiceBox.getSelectionModel().selectFirst();
 
-        window.getChildren().add(label1); //Builds the window that asks for stuff
+        window.getChildren().add(priceLabel); //Builds the window that asks for stuff
         window.getChildren().add(askForPrice);
-        window.getChildren().add(label2);
+        window.getChildren().add(amountLabel);
         window.getChildren().add(askForQuantity);
         VBox.setMargin(askForPrice, margin);
         VBox.setMargin(askForQuantity, margin);
         window.getChildren().add(choiceBox);
         window.getChildren().add(button);
-        window.getChildren().add(stockChart); //????
+        window.getChildren().add(stockChart); //Adds stock chart from StockChart
+        window.getChildren().add(resultsLabel);
 
-        Scene scene = new Scene(window, 400, 600); //Window properties
+        Scene scene = new Scene(window, 400, 700); //Window properties
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        ActionHandler actionHandler = new ActionHandler(askForPrice, askForQuantity, choiceBox, stockChart);
+        ActionHandler actionHandler = new ActionHandler(askForPrice, askForQuantity, choiceBox, stockChart,resultsLabel);
         button.setOnAction(actionHandler);//Makes the button do the stuff told in the ActionHandler class
+
+
 
 
     }

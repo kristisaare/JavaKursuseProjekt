@@ -9,6 +9,8 @@ import java.util.HashMap;
  */
 public class Finance {
 
+    public static double reasonableFeePercent = 1.0;
+
     public Finance(){
 
     }
@@ -78,6 +80,26 @@ public class Finance {
         fees.put("SEB", bankFeeSEBUSA);
 
         return fees;
+    }
+
+    public Money findLowestFee(HashMap<String, Money> results) {
+
+        int lowestFee = Integer.MAX_VALUE;
+
+        for (HashMap.Entry<String, Money> valuePair : results.entrySet()) {
+            if (lowestFee>valuePair.getValue().getAmountCents()) {
+                lowestFee = valuePair.getValue().getAmountCents();
+            }
+        }
+
+        return new Money(lowestFee);
+    }
+
+    public double feeImpactPercent(Money bankFee, Money stockPrice, int stockQuantity){
+        double feeRatio = (double) bankFee.getAmountCents()/(stockPrice.getAmountCents()*stockQuantity);
+        double feePercent = Math.round(feeRatio*1000.0)/10.0;
+        return feePercent;
+
     }
 
 }

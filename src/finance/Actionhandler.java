@@ -3,8 +3,10 @@ package finance;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -18,6 +20,7 @@ public class ActionHandler implements EventHandler<ActionEvent> {
     TextField quantityTextField;
     ChoiceBox countryChoice;
     StockChart stockChart;
+    Label resultsLabel;
 
     public static Money convertPrice(TextField askForPrice) {
 
@@ -36,17 +39,22 @@ public class ActionHandler implements EventHandler<ActionEvent> {
         return stockQuantity;
     }
 
-    public ActionHandler(TextField _priceTextField, TextField _quantityTextField, ChoiceBox _countryChoice, StockChart _stockChart){
+    public ActionHandler(TextField _priceTextField,
+                         TextField _quantityTextField,
+                         ChoiceBox _countryChoice,
+                         StockChart _stockChart,
+                         Label _resultsLabel){
         priceTextField = _priceTextField;
         quantityTextField = _quantityTextField;
         countryChoice = _countryChoice;
         stockChart = _stockChart;
+        resultsLabel = _resultsLabel;
     }
 
 
     @Override
     public void handle(ActionEvent event) {
-        System.out.println("Hurraa!"+ countryChoice.getValue());
+        System.out.println("Hurraa! "+ countryChoice.getValue());
 
         Money stockPrice = ActionHandler.convertPrice(priceTextField);
         int stockPriceCents = stockPrice.getAmountCents();
@@ -67,11 +75,45 @@ public class ActionHandler implements EventHandler<ActionEvent> {
                 results = finance.calculateUSA(stockPriceCents, stockQuantity);
                 break;
             default:
-                return; //TODO Panic
+                return; 
         }
 
         stockChart.displayResults(results);
+        Money lowestFee = finance.findLowestFee(results);
+        System.out.println(lowestFee.getAmountAsDouble());
+        double feePercent = finance.feeImpactPercent(lowestFee, stockPrice, stockQuantity);
+        System.out.println(feePercent);
+        boolean feeIsReasonable = feePercent<=Finance.reasonableFeePercent;
 
+        displayResultsText(results, lowestFee, feePercent, feeIsReasonable);
+
+    }
+
+    public void displayResultsText(HashMap<String, Money> results,
+                                   Money lowestFee,
+                                   double feePercent,
+                                   boolean feeIsReasonable){
+        ArrayList cheapestBanks = new ArrayList();
+        for (HashMap.Entry<String, Money> valuePair : results.entrySet()){
+            if (lowestFee.getAmountCents()==valuePair.getValue().getAmountCents()){
+                cheapestBanks.add(valuePair.getKey());
+            }
+        }
+
+        String feedback = new String("Minimum purchase fee is " +lowestFee.getAmountAsDouble()+" euro(s). \n" +
+                "Cheapest bank for you is "+ String.join(" or ", cheapestBanks)+" . \n" +
+                "The fee makes up "+feePercent+"% of the purchase price. \n");
+
+        String feedbackPositive = new String("This is a reasonably big purchase.");
+        String feedbackNegative = new String("You should consider making a bigger purchase.");
+
+        if (feeIsReasonable){
+            feedback = feedback + feedbackPositive;
+        } else {
+            feedback = feedback + feedbackNegative;
+        }
+        System.out.println(feedback);
+        resultsLabel.setText(feedback);
     }
 
 }
