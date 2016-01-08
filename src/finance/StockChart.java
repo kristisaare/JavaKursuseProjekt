@@ -34,6 +34,7 @@ public class StockChart extends VBox { //Chart testing
 
         for (HashMap.Entry<String, Money> valuePair : results.entrySet())  {
             feeSeries.getData().add(new XYChart.Data(valuePair.getKey(), valuePair.getValue().getAmountAsDouble()));
+            System.out.println(valuePair.getValue().getAmountAsDouble());//Test printout
         }
 
         barChart.getData().add(feeSeries);

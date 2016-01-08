@@ -21,7 +21,7 @@ public class Money {
         return amountCents;
     }
 
-    public double getAmountAsDouble() { return amountCents/100; }
+    public double getAmountAsDouble() { return amountCents/100.0; }
 
 
     //ToDo make a method to print stockprice to string
